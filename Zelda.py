@@ -4,6 +4,34 @@ import time
 from pygame.locals import*
 from time import sleep
 
+class Sprite():
+	def __init__(self):
+		self.x = 0;
+		self.y = 0;
+		self.w = 0;
+		self.h = 0;
+		self.isActive = True;
+	
+	def draw(self):
+		pass
+	def update(self):
+		pass
+	def loadImage(self):
+		pass
+	def Collided(self):
+		pass
+	def isBrick(self):
+		return False;
+	def isLink(self):
+		return False
+	def isBoomerang(self):
+		return False
+	def isPot(self):
+		return False
+
+
+
+
 class Model():
 	def __init__(self):
 		self.dest_x = 0
@@ -25,7 +53,7 @@ class Model():
 
 class View():
 	def __init__(self, model):
-		screen_size = (800,600)
+		screen_size = (700,500)
 		self.screen = pygame.display.set_mode(screen_size, 32)
 		self.turtle_image = pygame.image.load("turtle.png")
 		self.model = model
@@ -33,7 +61,7 @@ class View():
 
 	def update(self):
 		self.screen.fill([0,200,100])
-		self.screen.blit(self.turtle_image, self.model.rect)
+		# self.screen.blit(self.turtle_image, self.model.rect)
 		pygame.display.flip()
 
 class Controller():
