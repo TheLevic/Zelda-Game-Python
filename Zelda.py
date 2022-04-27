@@ -1,3 +1,4 @@
+from posixpath import islink
 import pygame
 import time
 
@@ -5,6 +6,11 @@ from pygame.locals import*
 from time import sleep
 
 class Sprite():
+	x = 0;
+	y = 0;
+	w = 0;
+	h = 0;
+	isActive = True;
 	def __init__(self):
 		self.x = 0;
 		self.y = 0;
@@ -30,38 +36,55 @@ class Sprite():
 		return False
 
 
+class Link(Sprite):
+	
+	def __init__(self):
+		self.x = 100;
+		self.y = 100;
+		self.w = 55;
+		self.h = 70;
+		self.animationNum = 0;
+		self.prevX = self.x;
+		self.prevY = self.y;
+		self.images = [];
+		self.loadImage();
+		self.image = self.images[self.animationNum];
+
+	def loadImage(self):
+		if (len(self.images) == 0):
+			for x in range(1,25):
+				self.images.append(pygame.image.load("linkPictures\\"+ str(x) + ".png"));
+	def isLink(self):
+		return True;
+
 
 
 class Model():
 	def __init__(self):
-		self.dest_x = 0
-		self.dest_y = 0
+		self.sprites = [];
+		link = Link();
+		self.sprites.append(link);
+		
 
 	def update(self):
-		if self.rect.left < self.dest_x:
-			self.rect.left += 1
-		if self.rect.left > self.dest_x:
-			self.rect.left -= 1
-		if self.rect.top < self.dest_y:
-			self.rect.top += 1
-		if self.rect.top > self.dest_y:
-			self.rect.top -= 1
-
-	def set_dest(self, pos):
-		self.dest_x = pos[0]
-		self.dest_y = pos[1]
+		pass
+		
 
 class View():
 	def __init__(self, model):
 		screen_size = (700,500)
 		self.screen = pygame.display.set_mode(screen_size, 32)
-		self.turtle_image = pygame.image.load("turtle.png")
+		# self.turtle_image = pygame.image.load("turtle.png")
 		self.model = model
-		self.model.rect = self.turtle_image.get_rect()
+		# self.model.rect = self.turtle_image.get_rect()
 
 	def update(self):
 		self.screen.fill([0,200,100])
 		# self.screen.blit(self.turtle_image, self.model.rect)
+		for sprite in self.model.sprites:
+			self.spriteImage = sprite.image;
+			self.model.rect = self.spriteImage.get_rect();
+			self.screen.blit(sprite.image, (sprite.x,sprite.y));
 		pygame.display.flip()
 
 class Controller():
