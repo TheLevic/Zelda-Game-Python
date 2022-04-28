@@ -50,20 +50,15 @@ class Link(Sprite):
 	def loadImage(self):
 		if (len(self.images) == 0):
 			for x in range(1,25):
-				self.images.append(pygame.image.load("linkPictures\\"+ str(x) + ".png"))
+				self.images.append(pygame.image.load("linkPictures/"+ str(x) + ".png"))
 
 
 
 	def isLink(self):
 		return True
 
-
-
 	def update():
 		return True
-
-
-
 
 	def getOutOfSprite(self, b):
 		if self.x + self.w >= b.x and self.prevX + self.w <= b.x:
@@ -75,22 +70,14 @@ class Link(Sprite):
 		if self.y + self.h >= b.y and self.prevY + self.h <= b.y:
 			self.y = self.prevY
 
-
-
-
 	def savePrev(self):
 		self.prevX = self.x
 		self.prevY = self.y
 
-
-
-
 	def getDirection(self):
 		return self.direction
 
-
-
-
+	# Link's movement
 	def moveUp(self):
 		self.direction = 1
 		self.y -= self.speed
@@ -99,8 +86,6 @@ class Link(Sprite):
 		self.image = self.images[self.animationNum]
 		self.animationNum += 1
 
-
-
 	def moveDown(self):
 		self.direction = 3
 		self.y += self.speed
@@ -108,8 +93,6 @@ class Link(Sprite):
 			self.animationNum = 5
 		self.image = self.images[self.animationNum]
 		self.animationNum += 1
-
-
 
 	def moveRight(self):
 		self.direction = 2
@@ -120,8 +103,6 @@ class Link(Sprite):
 		self.image = self.images[self.animationNum]
 		self.animationNum += 1
 
-
-
 	def moveLeft(self):
 		self.direction = 4
 		self.x -= self.speed
@@ -130,15 +111,26 @@ class Link(Sprite):
 		self.image = self.images[self.animationNum]
 		self.animationNum += 1
 
-
-
+class Brick(Sprite):
+	def __init__(self,locationx,locationy):
+		self.image = pygame.image.load("brick.jpg")
+		self.x = locationx
+		self.y = locationy
+		self.w = 50
+		self.h = 50
+	def update(self):
+		return True
+	def Collided(self):
+		pass
 
 
 class Model():
 	def __init__(self):
 		self.sprites = []
 		self.link = Link()
+		self.brick1 = Brick(400,400)
 		self.sprites.append(self.link)
+		self.sprites.append(self.brick1)
 		
 
 	def update(self):
@@ -149,9 +141,7 @@ class View():
 	def __init__(self, model):
 		screen_size = (700,500)
 		self.screen = pygame.display.set_mode(screen_size, 32)
-		# self.turtle_image = pygame.image.load("turtle.png")
 		self.model = model
-		# self.model.rect = self.turtle_image.get_rect()
 
 	def update(self):
 		self.screen.fill([0,200,100])
@@ -175,6 +165,8 @@ class Controller():
 				self.keep_going = False
 			elif event.type == KEYDOWN:
 				if event.key == K_ESCAPE:
+					self.keep_going = False
+				if event.key == K_q:
 					self.keep_going = False
 		keys = pygame.key.get_pressed()
 		if keys[K_LEFT]:
