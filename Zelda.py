@@ -1,4 +1,5 @@
 from abc import abstractmethod
+from contextlib import nullcontext
 from posixpath import islink
 import pygame
 import time
@@ -146,6 +147,26 @@ class Pot(Sprite):
 			for x in range(1,3):
 				self.images.append(pygame.image.load("Images/pot"+ str(x) + ".png"))
 
+class Boomerang(Sprite):
+	def __init__(self):
+		self.x = 10
+		self.y = 10
+		self.speed = 5
+		self.isActive = True
+		self.animationNum = 0
+		self.maxImageNum = 4
+		self.images = []
+		self.loadImage()
+		self.image = self.images[self.animationNum]
+		self.xDirection = 0
+		self.yDirection = 0
+
+	def loadImage(self):
+		if (len(self.images) == 0):
+			for x in range(1,self.maxImageNum + 1):
+				self.images.append(pygame.image.load("Images/boomerang"+ str(x) + ".png"))
+		
+		
 
 
 
@@ -162,6 +183,30 @@ class Model():
 
 	def update(self):
 		pass
+
+	def addBoomerang(self):
+		self.boom = Boomerang()
+		if (self.link.getDirection() == 1):
+			self.boom.xDirection = 0
+			self.boom.yDirection = -1
+			self.boom.x = self.link.x + (self.link.w * 1/2)
+			self.boom.y = self.link.y
+		elif (self.link.getDirection() == 2):
+			self.boom.xDirection = 1
+			self.boom.yDirection = 0
+			self.boom.x = self.link.x + self.link.w
+			self.boom.y = self.link.y + (self.link.h * 1/2)
+		elif (self.link.getDirection() == 3):
+			self.boom.xDirection = 0
+			self.boom.yDirection = 1
+			self.boom.x = self.link.x + (self.link.w * 1/2)
+			self.boom.y = self.link.y + self.link.h
+		elif (self.link.getDirection() == 4):
+			self.boom.xdirection = -1
+			self.boom.ydirection = 0
+			self.boom.x = self.link.x
+			self.boom.y = self.link.y + (self.link.h * 1/2)
+		self.sprites.append(self.boom)
 		
 
 class View():
@@ -195,6 +240,9 @@ class Controller():
 					self.keep_going = False
 				if event.key == K_q:
 					self.keep_going = False
+			elif event.type == KEYUP:
+				if event.key == K_LCTRL:
+					self.model.addBoomerang()
 		keys = pygame.key.get_pressed()
 		if keys[K_LEFT]:
 			self.model.link.moveLeft()
