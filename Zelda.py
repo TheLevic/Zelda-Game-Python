@@ -1,3 +1,4 @@
+from abc import abstractmethod
 from posixpath import islink
 import pygame
 import time
@@ -6,21 +7,19 @@ from pygame.locals import*
 from time import sleep
 
 class Sprite():
-	def __init__(self):
-		self.x = 0
-		self.y = 0
-		self.w = 0
-		self.h = 0
+	def __init__(self, locationx, locationy):
+		self.x = locationx
+		self.y = locationy
 		self.isActive = True
-	
-	def draw(self):
-		pass
+		self.speed = 5
+
 	def update(self):
 		pass
 	def loadImage(self):
 		pass
 	def Collided(self):
 		pass
+
 	def isBrick(self):
 		return False
 	def isLink(self):
@@ -34,11 +33,9 @@ class Sprite():
 class Link(Sprite):
 	
 	def __init__(self):
-		self.x = 100
-		self.y = 100
+		super().__init__(100,100)
 		self.w = 55
 		self.h = 70
-		self.speed = 5
 		self.animationNum = 0
 		self.prevX = self.x
 		self.prevY = self.y
@@ -113,15 +110,43 @@ class Link(Sprite):
 
 class Brick(Sprite):
 	def __init__(self,locationx,locationy):
+		super().__init__(locationx,locationy)
 		self.image = pygame.image.load("brick.jpg")
-		self.x = locationx
-		self.y = locationy
 		self.w = 50
 		self.h = 50
+
 	def update(self):
 		return True
+
 	def Collided(self):
 		pass
+
+class Pot(Sprite):
+	def __init__(self,locationx, locationy):
+		super().__init__(locationx, locationy)
+		self.maxImageNum = 2
+		self.animationNum = 0
+		self.inOnePiece = True
+		self.xDirection = 0
+		self.yDirection = 0
+		self.moveUp = False
+		self.moveRight = False
+		self.moveDown = False
+		self.moveLeft = False
+		self.countDown = 15
+		self.w = 35
+		self.h = 35
+		self.images = []
+		self.loadImage()
+		self.image = self.images[0]
+		
+
+	def loadImage(self):
+		if (len(self.images) == 0):
+			for x in range(1,3):
+				self.images.append(pygame.image.load("Images/pot"+ str(x) + ".png"))
+
+
 
 
 class Model():
@@ -129,8 +154,10 @@ class Model():
 		self.sprites = []
 		self.link = Link()
 		self.brick1 = Brick(400,400)
+		self.Pot1 = Pot(300,300)
 		self.sprites.append(self.link)
 		self.sprites.append(self.brick1)
+		self.sprites.append(self.Pot1)
 		
 
 	def update(self):
