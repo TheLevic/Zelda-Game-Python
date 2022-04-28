@@ -6,17 +6,12 @@ from pygame.locals import*
 from time import sleep
 
 class Sprite():
-	x = 0;
-	y = 0;
-	w = 0;
-	h = 0;
-	isActive = True;
 	def __init__(self):
-		self.x = 0;
-		self.y = 0;
-		self.w = 0;
-		self.h = 0;
-		self.isActive = True;
+		self.x = 0
+		self.y = 0
+		self.w = 0
+		self.h = 0
+		self.isActive = True
 	
 	def draw(self):
 		pass
@@ -27,7 +22,7 @@ class Sprite():
 	def Collided(self):
 		pass
 	def isBrick(self):
-		return False;
+		return False
 	def isLink(self):
 		return False
 	def isBoomerang(self):
@@ -39,31 +34,111 @@ class Sprite():
 class Link(Sprite):
 	
 	def __init__(self):
-		self.x = 100;
-		self.y = 100;
-		self.w = 55;
-		self.h = 70;
-		self.animationNum = 0;
-		self.prevX = self.x;
-		self.prevY = self.y;
-		self.images = [];
-		self.loadImage();
-		self.image = self.images[self.animationNum];
+		self.x = 100
+		self.y = 100
+		self.w = 55
+		self.h = 70
+		self.speed = 5
+		self.animationNum = 0
+		self.prevX = self.x
+		self.prevY = self.y
+		self.images = []
+		self.loadImage()
+		self.image = self.images[self.animationNum]
+		self.direction = 0
 
 	def loadImage(self):
 		if (len(self.images) == 0):
 			for x in range(1,25):
-				self.images.append(pygame.image.load("linkPictures\\"+ str(x) + ".png"));
+				self.images.append(pygame.image.load("linkPictures\\"+ str(x) + ".png"))
+
+
+
 	def isLink(self):
-		return True;
+		return True
+
+
+
+	def update():
+		return True
+
+
+
+
+	def getOutOfSprite(self, b):
+		if self.x + self.w >= b.x and self.prevX + self.w <= b.x:
+			self.x = self.prevX
+		if self.x <= b.x + b.w and self.prevX >= b.x + b.w:
+			self.x = self.prevX
+		if self.y <= b.y + b.h and self.prevY >= b.y + b.h:
+			self.y = self.prevY
+		if self.y + self.h >= b.y and self.prevY + self.h <= b.y:
+			self.y = self.prevY
+
+
+
+
+	def savePrev(self):
+		self.prevX = self.x
+		self.prevY = self.y
+
+
+
+
+	def getDirection(self):
+		return self.direction
+
+
+
+
+	def moveUp(self):
+		self.direction = 1
+		self.y -= self.speed
+		if self.animationNum >= 4:
+			self.animationNum = 0	
+		self.image = self.images[self.animationNum]
+		self.animationNum += 1
+
+
+
+	def moveDown(self):
+		self.direction = 3
+		self.y += self.speed
+		if self.animationNum >= 9 or self.animationNum < 5:
+			self.animationNum = 5
+		self.image = self.images[self.animationNum]
+		self.animationNum += 1
+
+
+
+	def moveRight(self):
+		self.direction = 2
+		self.x += self.speed
+		
+		if self.animationNum >= 19 or self.animationNum < 15:
+			self.animationNum = 15
+		self.image = self.images[self.animationNum]
+		self.animationNum += 1
+
+
+
+	def moveLeft(self):
+		self.direction = 4
+		self.x -= self.speed
+		if self.animationNum >= 14 or self.animationNum < 10:
+			self.animationNum = 10
+		self.image = self.images[self.animationNum]
+		self.animationNum += 1
+
+
 
 
 
 class Model():
 	def __init__(self):
-		self.sprites = [];
-		link = Link();
-		self.sprites.append(link);
+		self.sprites = []
+		self.link = Link()
+		self.sprites.append(self.link)
 		
 
 	def update(self):
@@ -82,10 +157,12 @@ class View():
 		self.screen.fill([0,200,100])
 		# self.screen.blit(self.turtle_image, self.model.rect)
 		for sprite in self.model.sprites:
-			self.spriteImage = sprite.image;
-			self.model.rect = self.spriteImage.get_rect();
-			self.screen.blit(sprite.image, (sprite.x,sprite.y));
+			self.spriteImage = sprite.image
+			self.model.rect = self.spriteImage.get_rect()
+			self.screen.blit(sprite.image, (sprite.x,sprite.y))
 		pygame.display.flip()
+
+
 
 class Controller():
 	def __init__(self, model):
@@ -99,17 +176,18 @@ class Controller():
 			elif event.type == KEYDOWN:
 				if event.key == K_ESCAPE:
 					self.keep_going = False
-			elif event.type == pygame.MOUSEBUTTONUP:
-				self.model.set_dest(pygame.mouse.get_pos())
 		keys = pygame.key.get_pressed()
 		if keys[K_LEFT]:
-			self.model.dest_x -= 1
+			self.model.link.moveLeft()
 		if keys[K_RIGHT]:
-			self.model.dest_x += 1
+			self.model.link.moveRight()
 		if keys[K_UP]:
-			self.model.dest_y -= 1
+			self.model.link.moveUp()
 		if keys[K_DOWN]:
-			self.model.dest_y += 1
+			self.model.link.moveDown()
+
+
+
 
 print("Use the arrow keys to move. Press Esc to quit.")
 pygame.init()
