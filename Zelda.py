@@ -12,7 +12,7 @@ class Sprite():
 		self.x = locationx
 		self.y = locationy
 		self.isActive = True
-		self.speed = 5
+		self.speed = 8
 
 	def update(self):
 		pass
@@ -20,15 +20,6 @@ class Sprite():
 		pass
 	def Collided(self):
 		pass
-
-	def isBrick(self):
-		return False
-	def isLink(self):
-		return False
-	def isBoomerang(self):
-		return False
-	def isPot(self):
-		return False
 
 
 class Link(Sprite):
@@ -45,6 +36,7 @@ class Link(Sprite):
 		self.image = self.images[self.animationNum]
 		self.direction = 0
 
+
 	def loadImage(self):
 		if (len(self.images) == 0):
 			for x in range(1,25):
@@ -52,8 +44,7 @@ class Link(Sprite):
 
 
 
-	def isLink(self):
-		return True
+	
 
 	def update(self):
 		self.savePrev()
@@ -148,6 +139,61 @@ class Pot(Sprite):
 			for x in range(1,3):
 				self.images.append(pygame.image.load("Images/pot"+ str(x) + ".png"))
 
+	def cycleImages(self):
+		if(self.inOnePiece):
+			self.animationNum = self.maxImageNum - self.maxImageNum
+		else:
+			self.animationNum = self.maxImageNum - 1
+		self.image = self.images[self.animationNum]
+
+
+	def Collided(self):
+		self.inOnePiece = False
+		self.speed = 0
+
+	# Pot movement
+	def movePotUp(self):
+		self.xDirection = 0
+		self.yDirection = -1
+		self.y += self.speed * self.yDirection
+    
+	def movePotRight(self):
+		self.xDirection = 1
+		self.yDirection = 0
+		self.x += self.speed * self.xDirection
+        
+    
+	def movePotDown(self):
+		self.xDirection = 0
+		self.yDirection = 1
+		self.y += self.speed * self.yDirection
+    
+	def movePotLeft(self):
+		self.xDirection = -1
+		self.yDirection = 0
+		self.x += self.speed * self.xDirection
+
+	def setMoveDown(self,i):
+		self.moveDown = i
+    
+
+	def update(self):
+		if (self.moveUp):
+			self.movePotUp()
+		if (self.moveRight):
+			self.movePotRight()
+		if (self.moveDown):
+			self.movePotDown()
+		if (self.moveLeft):
+			self.movePotLeft()
+		self.cycleImages()
+		if not(self.inOnePiece):
+			self.countDown -= 1
+			if (self.countDown == 0):
+				self.isActive = False
+		return self.isActive
+		
+
 class Boomerang(Sprite):
 	def __init__(self):
 		self.x = 10
@@ -209,8 +255,32 @@ class Model():
 					if (self.collide):
 						if isinstance(i,Link) and not isinstance(j,Boomerang):
 							i.getOutOfSprite(j)
-						elif isinstance(i,Boomerang) and not isinstance(j,Link):
+						if isinstance(i,Boomerang) and not isinstance(j,Link):
 							i.Collided()
+						if isinstance(i,Pot) and not isinstance(j,Link):
+							i.Collided()
+						elif isinstance(i,Link) and isinstance(j, Pot):
+							if (i.getDirection() == 1):
+								j.moveUp = True
+								j.moveRight = False
+								j.moveDown = False
+								j.moveLeft = False
+							elif (i.getDirection() == 2):
+								j.moveUp = False
+								j.moveRight = True
+								j.moveDown = False
+								j.moveLeft = False
+							elif (i.getDirection() == 3):
+								j.moveUp = False
+								j.moveRight = False
+								j.moveDown = True
+								j.moveLeft = False
+							elif (i.getDirection() == 4):
+								j.moveUp = False
+								j.moveRight = False
+								j.moveDown = False
+								j.moveLeft = True
+						
 
 
 			i.update()
@@ -235,8 +305,8 @@ class Model():
 			self.boom.x = self.link.x + (self.link.w * 1/2)
 			self.boom.y = self.link.y + self.link.h
 		elif (self.link.getDirection() == 4):
-			self.boom.xdirection = -1
-			self.boom.ydirection = 0
+			self.boom.xDirection = -1
+			self.boom.yDirection = 0
 			self.boom.x = self.link.x
 			self.boom.y = self.link.y + (self.link.h * 1/2)
 		self.sprites.append(self.boom)
