@@ -208,10 +208,14 @@ class Model():
 					self.collide = self.isThereACollision(i, j)
 					if (self.collide):
 						if isinstance(i,Link) and not isinstance(j,Boomerang):
-							self.link.getOutOfSprite(j)
+							i.getOutOfSprite(j)
+						elif isinstance(i,Boomerang) and not isinstance(j,Link):
+							i.Collided()
 
 
 			i.update()
+			if (i.update() == False):
+				self.sprites.remove(i)
 
 	def addBoomerang(self):
 		self.boom = Boomerang()
