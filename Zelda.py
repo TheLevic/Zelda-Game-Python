@@ -55,7 +55,8 @@ class Link(Sprite):
 	def isLink(self):
 		return True
 
-	def update():
+	def update(self):
+		self.savePrev()
 		return True
 
 	def getOutOfSprite(self, b):
@@ -182,7 +183,16 @@ class Model():
 		
 
 	def update(self):
-		pass
+		for i in self.sprites:
+			for j in self.sprites:
+				if i != j:
+					self.collide = self.isThereACollision(i, j)
+					if (self.collide):
+						if (isinstance(i,Link)):
+							self.link.getOutOfSprite(j)
+
+
+			i.update()
 
 	def addBoomerang(self):
 		self.boom = Boomerang()
@@ -207,6 +217,20 @@ class Model():
 			self.boom.x = self.link.x
 			self.boom.y = self.link.y + (self.link.h * 1/2)
 		self.sprites.append(self.boom)
+	
+	def isThereACollision(self, l, b):
+		if (l.x + l.w < b.x):
+			return False;
+		
+		if (l.x > b.x + b.w):
+			return False;
+		
+		if(l.y + l.h < b.y):
+			return False;
+		
+		if (l.y > b.y + b.h):
+			return False;
+		return True;
 		
 
 class View():
