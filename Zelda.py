@@ -152,6 +152,8 @@ class Boomerang(Sprite):
 	def __init__(self):
 		self.x = 10
 		self.y = 10
+		self.w = 8;
+		self.h = 12
 		self.speed = 5
 		self.isActive = True
 		self.animationNum = 0
@@ -188,7 +190,7 @@ class Model():
 				if i != j:
 					self.collide = self.isThereACollision(i, j)
 					if (self.collide):
-						if (isinstance(i,Link)):
+						if isinstance(i,Link) and not isinstance(j,Boomerang):
 							self.link.getOutOfSprite(j)
 
 
