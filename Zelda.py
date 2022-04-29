@@ -152,6 +152,8 @@ class Boomerang(Sprite):
 	def __init__(self):
 		self.x = 10
 		self.y = 10
+		self.w = 8
+		self.h = 12
 		self.speed = 5
 		self.isActive = True
 		self.animationNum = 0
@@ -166,6 +168,23 @@ class Boomerang(Sprite):
 		if (len(self.images) == 0):
 			for x in range(1,self.maxImageNum + 1):
 				self.images.append(pygame.image.load("Images/boomerang"+ str(x) + ".png"))
+
+	def cycleImages(self):
+		if (self.animationNum == self.maxImageNum - 1):
+			self.animationNum = 0
+		self.image = self.images[self.animationNum]
+		self.animationNum += 1
+
+
+	def Collided(self):
+		self.isActive = False
+
+	def update(self):
+		self.x += self.speed * self.xDirection
+		self.y += self.speed * self.yDirection
+		self.cycleImages()
+		return self.isActive
+
 		
 		
 
