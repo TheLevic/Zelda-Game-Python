@@ -198,7 +198,7 @@ class Boomerang(Sprite):
 	def __init__(self):
 		self.x = 10
 		self.y = 10
-		self.w = 8;
+		self.w = 8
 		self.h = 12
 		self.speed = 5
 		self.isActive = True
@@ -243,8 +243,239 @@ class Model():
 		self.brick1 = Brick(400,400)
 		self.Pot1 = Pot(300,300)
 		self.sprites.append(self.link)
-		self.sprites.append(self.brick1)
-		self.sprites.append(self.Pot1)
+		self.sprites.append(Brick(0,0))
+		self.sprites.append(Brick(0,50))
+		self.sprites.append( Brick(0,100))
+		self.sprites.append( Brick(0,150))
+		self.sprites.append( Brick(0,200))
+		self.sprites.append( Brick(0,250))
+		self.sprites.append( Brick(0,300))
+		self.sprites.append( Brick(0,350))
+		self.sprites.append( Brick(0,400))
+		self.sprites.append( Brick(0,450))
+		self.sprites.append( Brick(50,450))
+		self.sprites.append( Brick(0,450))
+		self.sprites.append( Brick(50,450))
+		self.sprites.append( Brick(100,450))
+		self.sprites.append( Brick(100,400))
+		self.sprites.append( Brick(0,450))
+		self.sprites.append( Brick(350,350))
+		self.sprites.append( Brick(350,400))
+		self.sprites.append( Brick(400,400))
+		self.sprites.append( Brick(400,350))
+		self.sprites.append( Brick(450,350))
+		self.sprites.append( Brick(450,400))
+		self.sprites.append( Brick(600,400))
+		self.sprites.append( Brick(600,350))
+		self.sprites.append( Brick(650,350))
+		self.sprites.append( Brick(650,150))
+		self.sprites.append( Brick(650,100))
+		self.sprites.append( Brick(650,50))
+		self.sprites.append( Brick(650,0))
+		self.sprites.append( Brick(700,0))
+		self.sprites.append( Brick(700,50))
+		self.sprites.append( Brick(700,450))
+		self.sprites.append( Brick(700,400))
+		self.sprites.append( Brick(700,100))
+		self.sprites.append( Brick(700,150))
+		self.sprites.append( Brick(750,0))
+		self.sprites.append( Brick(800,0))
+		self.sprites.append( Brick(850,0))
+		self.sprites.append( Brick(900,0))
+		self.sprites.append( Brick(1000,0))
+		self.sprites.append( Brick(950,0))
+		self.sprites.append( Brick(1050,0))
+		self.sprites.append( Brick(1100,0))
+		self.sprites.append( Brick(1150,0))
+		self.sprites.append( Brick(1200,0))
+		self.sprites.append( Brick(1300,0))
+		self.sprites.append( Brick(1250,0))
+		self.sprites.append( Brick(1350,0))
+		self.sprites.append( Brick(1350,50))
+		self.sprites.append( Brick(1350,100))
+		self.sprites.append( Brick(1350,200))
+		self.sprites.append( Brick(1350,150))
+		self.sprites.append( Brick(1350,250))
+		self.sprites.append( Brick(1350,300))
+		self.sprites.append( Brick(1350,400))
+		self.sprites.append( Brick(1350,350))
+		self.sprites.append( Brick(1350,450))
+		self.sprites.append( Brick(1300,450))
+		self.sprites.append( Brick(1250,450))
+		self.sprites.append( Brick(1150,450))
+		self.sprites.append( Brick(1100,450))
+		self.sprites.append( Brick(1050,450))
+		self.sprites.append( Brick(1000,450))
+		self.sprites.append( Brick(950,450))
+		self.sprites.append( Brick(950,400))
+		self.sprites.append( Brick(1000,250))
+		self.sprites.append( Brick(1050,250))
+		self.sprites.append( Brick(700,500))
+		self.sprites.append( Brick(700,550))
+		self.sprites.append( Brick(700,600))
+		self.sprites.append( Brick(700,650))
+		self.sprites.append( Brick(700,700))
+		self.sprites.append( Brick(700,750))
+		self.sprites.append( Brick(700,950))
+		self.sprites.append( Brick(750,950))
+		self.sprites.append( Brick(850,700))
+		self.sprites.append( Brick(950,700))
+		self.sprites.append( Brick(900,700))
+		self.sprites.append( Brick(1000,700))
+		self.sprites.append( Brick(1050,700))
+		self.sprites.append( Brick(1100,700))
+		self.sprites.append( Brick(1150,700))
+		self.sprites.append( Brick(1200,950))
+		self.sprites.append( Brick(1150,950))
+		self.sprites.append( Brick(1100,950))
+		self.sprites.append( Brick(1050,950))
+		self.sprites.append( Brick(950,950))
+		self.sprites.append( Brick(1000,950))
+		self.sprites.append( Brick(850,950))
+		self.sprites.append( Brick(800,950))
+		self.sprites.append( Brick(900,950))
+		self.sprites.append( Brick(1250,950))
+		self.sprites.append( Brick(1300,950))
+		self.sprites.append( Brick(1350,950))
+		self.sprites.append( Brick(1350,900))
+		self.sprites.append( Brick(1350,850))
+		self.sprites.append( Brick(1350,800))
+		self.sprites.append( Brick(1350,650))
+		self.sprites.append( Brick(1350,700))
+		self.sprites.append( Brick(1350,600))
+		self.sprites.append( Brick(1350,550))
+		self.sprites.append( Brick(1350,500))
+		self.sprites.append( Brick(1300,500))
+		self.sprites.append( Brick(0,950))
+		self.sprites.append( Brick(0,850))
+		self.sprites.append( Brick(0,900))
+		self.sprites.append( Brick(0,800))
+		self.sprites.append( Brick(0,750))
+		self.sprites.append( Brick(0,700))
+		self.sprites.append( Brick(0,650))
+		self.sprites.append( Brick(0,600))
+		self.sprites.append( Brick(0,550))
+		self.sprites.append( Brick(50,950))
+		self.sprites.append( Brick(150,950))
+		self.sprites.append( Brick(200,950))
+		self.sprites.append( Brick(250,950))
+		self.sprites.append( Brick(400,950))
+		self.sprites.append( Brick(350,950))
+		self.sprites.append( Brick(450,950))
+		self.sprites.append( Brick(550,950))
+		self.sprites.append( Brick(600,950))
+		self.sprites.append( Brick(650,750))
+		self.sprites.append( Brick(650,650))
+		self.sprites.append( Brick(650,700))
+		self.sprites.append( Brick(650,600))
+		self.sprites.append( Brick(650,500))
+		self.sprites.append( Brick(650,550))
+		self.sprites.append( Brick(0,500))
+		self.sprites.append( Brick(450,600))
+		self.sprites.append( Brick(150,700))
+		self.sprites.append( Brick(200,750))
+		self.sprites.append( Brick(250,800))
+		self.sprites.append( Brick(300,800))
+		self.sprites.append( Brick(400,800))
+		self.sprites.append( Brick(350,800))
+		self.sprites.append( Brick(450,800))
+		self.sprites.append( Brick(350,450))
+		self.sprites.append( Brick(400,450))
+		self.sprites.append( Brick(450,450))
+		self.sprites.append( Brick(600,450))
+		self.sprites.append( Brick(650,450))
+		self.sprites.append( Brick(50,0))
+		self.sprites.append( Brick(100,0))
+		self.sprites.append( Brick(150,0))
+		self.sprites.append( Brick(200,0))
+		self.sprites.append( Brick(250,0))
+		self.sprites.append( Brick(300,0))
+		self.sprites.append( Brick(350,0))
+		self.sprites.append( Brick(400,0))
+		self.sprites.append( Brick(450,0))
+		self.sprites.append( Brick(500,0))
+		self.sprites.append( Brick(550,0))
+		self.sprites.append( Brick(600,0))
+		self.sprites.append( Brick(150,350))
+		self.sprites.append( Brick(200,350))
+		self.sprites.append( Brick(150,400))
+		self.sprites.append( Brick(200,400))
+		self.sprites.append( Brick(150,450))
+		self.sprites.append( Brick(200,450))
+		self.sprites.append( Brick(250,300))
+		self.sprites.append( Brick(300,300))
+		self.sprites.append( Brick(50,500))
+		self.sprites.append( Brick(150,500))
+		self.sprites.append( Brick(100,500))
+		self.sprites.append( Brick(200,500))
+		self.sprites.append( Brick(300,500))
+		self.sprites.append( Brick(250,500))
+		self.sprites.append( Brick(350,500))
+		self.sprites.append( Brick(400,500))
+		self.sprites.append( Brick(450,500))
+		self.sprites.append( Brick(600,500))
+		self.sprites.append( Brick(100,950))
+		self.sprites.append( Brick(300,950))
+		self.sprites.append( Brick(500,950))
+		self.sprites.append( Brick(650,950))
+		self.sprites.append( Brick(1250,500))
+		self.sprites.append( Brick(1200,500))
+		self.sprites.append( Brick(1150,500))
+		self.sprites.append( Brick(1100,500))
+		self.sprites.append( Brick(1000,500))
+		self.sprites.append( Brick(1050,500))
+		self.sprites.append( Brick(950,500))
+		self.sprites.append( Brick(850,400))
+		self.sprites.append( Brick(850,450))
+		self.sprites.append( Brick(900,500))
+		self.sprites.append( Brick(850,500))
+		self.sprites.append( Brick(700,350))
+		self.sprites.append( Brick(1200,450))
+		self.sprites.append( Brick(1100,400))
+		self.sprites.append( Brick(1100,350))
+		self.sprites.append( Brick(1100,300))
+		self.sprites.append( Brick(1300,400))
+		self.sprites.append( Brick(1300,350))
+		self.sprites.append( Brick(1300,50))
+		self.sprites.append( Brick(1300,100))
+		self.sprites.append( Brick(1300,1500))
+		self.sprites.append( Brick(1250,100))
+		self.sprites.append( Brick(1250,50))
+		self.sprites.append( Brick(750,50))
+		self.sprites.append( Brick(800,50))
+		self.sprites.append( Brick(750,100))
+		self.sprites.append( Brick(1300,550))
+		self.sprites.append( Brick(1250,550))
+		self.sprites.append( Brick(1300,600))
+		self.sprites.append( Brick(1300,900))
+		self.sprites.append( Brick(1200,900))
+		self.sprites.append( Brick(1250,900))
+		self.sprites.append( Brick(1250,850))
+		self.sprites.append( Brick(1300,850))
+		self.sprites.append( Brick(1350,750))
+		self.sprites.append( Brick(1300,800))
+		self.sprites.append( Pot(600,200))
+		self.sprites.append( Pot(600,250))
+		self.sprites.append( Pot(600,300))
+		self.sprites.append( Pot(300,750))
+		self.sprites.append( Pot(350,750))
+		self.sprites.append( Pot(300,900))
+		self.sprites.append( Pot(350,900))
+		self.sprites.append( Pot(400,900))
+		self.sprites.append( Pot(1050,650))
+		self.sprites.append( Pot(1100,650))
+		self.sprites.append( Pot(1150,650))
+		self.sprites.append( Pot(1200,850))
+		self.sprites.append( Pot(1250,800))
+		self.sprites.append( Pot(1300,750))
+		self.sprites.append( Pot(1300,700))
+		self.sprites.append( Pot(1150,900))
+		self.sprites.append( Pot(850,650))
+		self.sprites.append( Pot(950,350))
+		self.sprites.append( Pot(1000,200))
+		self.sprites.append( Pot(1050,200))
+		self.sprites.append( Pot(1200,400))
+		self.sprites.append( Pot(1300,300))
 		
 
 	def update(self):
@@ -313,24 +544,30 @@ class Model():
 	
 	def isThereACollision(self, l, b):
 		if (l.x + l.w < b.x):
-			return False;
+			return False
 		
 		if (l.x > b.x + b.w):
-			return False;
+			return False
 		
 		if(l.y + l.h < b.y):
-			return False;
+			return False
 		
 		if (l.y > b.y + b.h):
-			return False;
-		return True;
+			return False
+		return True
 		
 
 class View():
+	windowXSize = 700;
+	windowYSize = 500;
+	scrollPositonX = 0;
+	scrollPositonY = 0;
 	def __init__(self, model):
 		screen_size = (700,500)
 		self.screen = pygame.display.set_mode(screen_size, 32)
 		self.model = model
+		
+		
 
 	def update(self):
 		self.screen.fill([0,200,100])
@@ -338,7 +575,7 @@ class View():
 		for sprite in self.model.sprites:
 			self.spriteImage = sprite.image
 			self.model.rect = self.spriteImage.get_rect()
-			self.screen.blit(sprite.image, (sprite.x,sprite.y))
+			self.screen.blit(sprite.image, (sprite.x - View.scrollPositonX,sprite.y - View.scrollPositonY))
 		pygame.display.flip()
 
 
@@ -363,12 +600,39 @@ class Controller():
 		keys = pygame.key.get_pressed()
 		if keys[K_LEFT]:
 			self.model.link.moveLeft()
+			self.viewDecreaseX()
 		if keys[K_RIGHT]:
 			self.model.link.moveRight()
+			self.viewIncreaseX()
+			self.viewIncreaseX
 		if keys[K_UP]:
 			self.model.link.moveUp()
+			self.viewDecreaseY()
 		if keys[K_DOWN]:
 			self.model.link.moveDown()
+			self.viewIncraseY()
+	
+	def viewIncreaseX(self):
+		if (self.model.link.x == View.windowXSize):
+			View.scrollPositonX += View.windowXSize;
+		
+	
+	def viewDecreaseX(self):
+		if (self.model.link.x == View.windowXSize):
+			View.scrollPositonX -= View.windowXSize;
+		
+
+	
+	def viewIncraseY(self):
+		if (self.model.link.y == View.windowYSize):
+			View.scrollPositonY += View.windowYSize;
+		
+	
+	def viewDecreaseY(self):
+		if (self.model.link.y == View.windowYSize):
+			View.scrollPositonY -= View.windowYSize;
+		
+	
 
 
 
